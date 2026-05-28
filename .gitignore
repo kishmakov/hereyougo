@@ -1,0 +1,5 @@
+*.env
+.env
+hereyougo.env
+__pycache__/
+*.pyc
