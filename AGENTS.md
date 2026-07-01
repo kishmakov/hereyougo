@@ -13,7 +13,7 @@ Use this command to access Euler computational cluster from ETH:
 
 ## Secrets
 
-Secrets should not be commited in the repository. They only can be saved in the
+Secrets should not be committed in the repository. They only can be saved in the
 bundled Docker image. On dev machine they are stored in environment as follows:
 
 - `HEREYOUGOBOT_PORT` for open port on VM to listen
@@ -26,7 +26,5 @@ bundled Docker image. On dev machine they are stored in environment as follows:
 
 - Preserve `README.md`.
 - Keep repository changes small and intentional.
-- Do not restore the old application files unless explicitly requested.
 - Before committing, verify that only expected files are tracked.
-
 
