@@ -2,4 +2,8 @@
 .env
 hereyougo.env
 __pycache__/
-*.pyc
+.venv/
+*.py[cod]
+build/
+dist/
+*.egg-info/
