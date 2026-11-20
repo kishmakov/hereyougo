@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Build, test and upload the hereyougo Python package to TestPyPI.
 # Set SKIP_UPLOAD=1 to only build and test.
 set -euo pipefail
 
