@@ -1,8 +1,8 @@
 import hashlib
-import hmac
 import json
 import os
 import re
+import secrets
 import sqlite3
 import threading
 import time
@@ -91,11 +91,7 @@ def initialize_database():
 
 
 def user_id_hash(user_id):
-    return hmac.new(
-        REGISTRY_SECRET.encode("utf-8"),
-        user_id.encode("utf-8"),
-        hashlib.sha256,
-    ).digest()
+    return hashlib.sha256((REGISTRY_SECRET + user_id).encode("utf-8")).digest()
 
 
 def register_user(telegram_user_id, telegram_chat_id, user_id):
@@ -396,7 +392,7 @@ class Handler(BaseHTTPRequestHandler):
         if NOTIFY_TOKEN:
             auth = self.headers.get("Authorization", "")
             expected = f"Bearer {NOTIFY_TOKEN}"
-            if not hmac.compare_digest(auth, expected):
+            if not secrets.compare_digest(auth, expected):
                 self._respond(401, {"error": "unauthorized"})
                 return
 
