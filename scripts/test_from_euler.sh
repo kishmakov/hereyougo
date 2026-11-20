@@ -2,17 +2,19 @@
 set -euo pipefail
 
 : "${SSH_EULER_PASS:?SSH_EULER_PASS is not set}"
-: "${GC_VM_IP:?GC_VM_IP is not set}"
-: "${HEREYOUGOBOT_PORT:?HEREYOUGOBOT_PORT is not set}"
+: "${HEREYOUGO_VM_IP:?HEREYOUGO_VM_IP is not set}"
+: "${HEREYOUGO_BOT_PORT:?HEREYOUGO_BOT_PORT is not set}"
+: "${HEREYOUGO_USER_ID:?HEREYOUGO_USER_ID is not set}"
 
 EULER_SSH_TARGET="${EULER_SSH_TARGET:-EULER}"
-BOT_SERVICE_URL="http://${GC_VM_IP}:${HEREYOUGOBOT_PORT}/notify"
+BOT_SERVICE_URL="http://${HEREYOUGO_VM_IP}:${HEREYOUGO_BOT_PORT}/notify"
 MESSAGE="HereYouGo Euler SLURM test completed"
 SLURM_TEST_SLEEP_SECONDS="3"
 
 printf -v bot_url_q "%q" "${BOT_SERVICE_URL}"
 printf -v message_q "%q" "${MESSAGE}"
 printf -v notify_token_q "%q" "${NOTIFY_TOKEN:-}"
+printf -v user_id_q "%q" "${HEREYOUGO_USER_ID}"
 printf -v sleep_seconds_q "%q" "${SLURM_TEST_SLEEP_SECONDS}"
 
 
@@ -31,6 +33,7 @@ set -euo pipefail
 BOT_SERVICE_URL=${bot_url_q}
 MESSAGE=${message_q}
 NOTIFY_TOKEN=${notify_token_q}
+HEREYOUGO_USER_ID=${user_id_q}
 SLURM_TEST_SLEEP_SECONDS=${sleep_seconds_q}
 
 job_started_at="\$(date +%s)"
@@ -50,6 +53,7 @@ curl_args=(
   -X POST
   "\${BOT_SERVICE_URL}"
   -H "Content-Type: text/plain"
+  -H "X-HereYouGo-User-ID: \${HEREYOUGO_USER_ID}"
   --data-binary @-
 )
 

@@ -6,11 +6,11 @@ source "${ROOT_DIR}/scripts/common.sh"
 
 if ! gcloud artifacts repositories describe "${REPOSITORY}" \
   --location="${REGION}" \
-  --project="${GC_PROJECT_ID}" >/dev/null 2>&1; then
+  --project="${HEREYOUGO_PROJECT_ID}" >/dev/null 2>&1; then
   gcloud artifacts repositories create "${REPOSITORY}" \
     --repository-format=docker \
     --location="${REGION}" \
-    --project="${GC_PROJECT_ID}" \
+    --project="${HEREYOUGO_PROJECT_ID}" \
     --description="HereYouGo Docker images"
 fi
 

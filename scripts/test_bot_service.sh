@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-: "${GC_VM_IP:?GC_VM_IP is not set}"
-: "${HEREYOUGOBOT_PORT:?HEREYOUGOBOT_PORT is not set}"
+: "${HEREYOUGO_VM_IP:?HEREYOUGO_VM_IP is not set}"
+: "${HEREYOUGO_BOT_PORT:?HEREYOUGO_BOT_PORT is not set}"
+: "${HEREYOUGO_USER_ID:?HEREYOUGO_USER_ID is not set}"
 
 MESSAGE="${*:-HereYouGo test message from scripts/test_bot_service.sh}"
-URL="http://${GC_VM_IP}:${HEREYOUGOBOT_PORT}/notify"
+URL="http://${HEREYOUGO_VM_IP}:${HEREYOUGO_BOT_PORT}/notify"
 
 curl_args=(
   --fail-with-body
@@ -13,6 +14,7 @@ curl_args=(
   -X POST
   "${URL}"
   -H "Content-Type: text/plain"
+  -H "X-HereYouGo-User-ID: ${HEREYOUGO_USER_ID}"
   --data-binary "${MESSAGE}"
 )
 
