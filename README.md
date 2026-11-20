@@ -14,7 +14,7 @@ incoming messages to Telegram. It can be used from Python as following:
 import os
 import urllib.request
 
-url = f"http://{os.environ['GC_VM_IP']}:{os.environ['HEREYOUGOBOT_PORT']}/notify"
+url = f"http://{os.environ['HEREYOUGO_VM_IP']}:{os.environ['HEREYOUGO_BOT_PORT']}/notify"
 headers = {"Content-Type": "text/plain"}
 
 request = urllib.request.Request(

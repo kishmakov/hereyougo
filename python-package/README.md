@@ -6,9 +6,10 @@ code:
 ```python
 import hereyougo
 
-hereyougo.notify("Training finished")
+hereyougo.notify("Training finished", user_id="my-notification-id")
 ```
 
 Network and HTTP errors are raised to the caller. The default request timeout is
-10 seconds and can be changed with `hereyougo.notify(message, timeout=30)`.
-
+10 seconds and can be changed with
+`hereyougo.notify(message, user_id="my-id", timeout=30)`. The recipient may
+also be set with the `HEREYOUGO_USER_ID` environment variable.
